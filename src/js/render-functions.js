@@ -12,10 +12,20 @@ let userDataLog = new SimpleLightbox('.main-list a', {
   captionDelay: 250,
 });
 
-export function onCreateGalleryPhoto(data) {
-  newGallery.innerHTML = '';
-  console.log(data);
+export function onCreateGalleryPhoto(data, flag) {
   newGallery.insertAdjacentHTML('beforeend', onCreateData(data.hits));
+
+  if (flag) {
+    const elem = document.querySelector('.gallery-item');
+    const rect = elem.getBoundingClientRect();
+    console.log('rect.key');
+    console.log(rect.height);
+    window.scrollBy({
+      top: rect.height * 2,
+      behavior: 'smooth',
+    });
+  }
+
   userDataLog.refresh();
 }
 function onCreateData(data) {
